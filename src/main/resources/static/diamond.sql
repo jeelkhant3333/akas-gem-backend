@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.46, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.43, for macos15 (arm64)
 --
 -- Host: localhost    Database: diamond
 -- ------------------------------------------------------
--- Server version	8.0.46
+-- Server version	8.0.43
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,7 +26,7 @@ CREATE TABLE `clarity_master` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `clarity` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +35,7 @@ CREATE TABLE `clarity_master` (
 
 LOCK TABLES `clarity_master` WRITE;
 /*!40000 ALTER TABLE `clarity_master` DISABLE KEYS */;
+INSERT INTO `clarity_master` VALUES (1,'FL'),(2,'IF'),(3,'VVS1'),(4,'VVS2'),(5,'VS1'),(6,'VS2'),(7,'SI1'),(8,'SI2'),(9,'I1'),(10,'I2');
 /*!40000 ALTER TABLE `clarity_master` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,7 +50,7 @@ CREATE TABLE `color_master` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `color` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -58,6 +59,7 @@ CREATE TABLE `color_master` (
 
 LOCK TABLES `color_master` WRITE;
 /*!40000 ALTER TABLE `color_master` DISABLE KEYS */;
+INSERT INTO `color_master` VALUES (1,'D'),(2,'E'),(3,'F');
 /*!40000 ALTER TABLE `color_master` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +98,7 @@ CREATE TABLE `fluorescence_master` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `fluorescence` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,6 +107,7 @@ CREATE TABLE `fluorescence_master` (
 
 LOCK TABLES `fluorescence_master` WRITE;
 /*!40000 ALTER TABLE `fluorescence_master` DISABLE KEYS */;
+INSERT INTO `fluorescence_master` VALUES (1,'NON'),(2,'FAINT'),(3,'MEDIUM'),(4,'STRONG'),(5,'VERY STRONG');
 /*!40000 ALTER TABLE `fluorescence_master` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +146,7 @@ CREATE TABLE `location_master` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `location` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,6 +155,7 @@ CREATE TABLE `location_master` (
 
 LOCK TABLES `location_master` WRITE;
 /*!40000 ALTER TABLE `location_master` DISABLE KEYS */;
+INSERT INTO `location_master` VALUES (1,'DUBAI'),(2,'NIVODA'),(3,'MUMBAI'),(4,'USA'),(5,'BELGIUM'),(6,'ISRAEL'),(7,'HONG KONG');
 /*!40000 ALTER TABLE `location_master` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +170,7 @@ CREATE TABLE `payment_status_master` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `status` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,6 +179,7 @@ CREATE TABLE `payment_status_master` (
 
 LOCK TABLES `payment_status_master` WRITE;
 /*!40000 ALTER TABLE `payment_status_master` DISABLE KEYS */;
+INSERT INTO `payment_status_master` VALUES (1,'cash'),(2,'BANK'),(3,'BAKI'),(4,'BANK BAKI (AG)'),(5,'PENDING');
 /*!40000 ALTER TABLE `payment_status_master` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +290,7 @@ CREATE TABLE `stones` (
   CONSTRAINT `stones_ibfk_7` FOREIGN KEY (`fluorescence_id`) REFERENCES `fluorescence_master` (`id`),
   CONSTRAINT `stones_ibfk_8` FOREIGN KEY (`lab_id`) REFERENCES `lab_master` (`id`),
   CONSTRAINT `stones_ibfk_9` FOREIGN KEY (`payment_status_id`) REFERENCES `payment_status_master` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,6 +299,7 @@ CREATE TABLE `stones` (
 
 LOCK TABLES `stones` WRITE;
 /*!40000 ALTER TABLE `stones` DISABLE KEYS */;
+INSERT INTO `stones` VALUES (1,'HS','23',1,1.20,1,1,1,1,1,1,1,'asdq2313134',12.00,14.40,314.00,4521.60,-3.00,4524.60,3,'1234-12-12','1234-02-21',1,1,'ASDF','ASDF','2026-07-04 13:40:38','2026-07-04 13:56:58');
 /*!40000 ALTER TABLE `stones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -355,4 +361,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-30 19:17:57
+-- Dump completed on 2026-07-04 21:19:37
