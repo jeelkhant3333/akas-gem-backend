@@ -140,5 +140,30 @@ public class StoneResponse {
         this.brokerName = p.getBrokerName();
     }
 
-
+    public Long getId() { return id; }
+    public String getKapan() { return kapan; }
+    public String getLotNo() { return lotNo; }
+    public String getShape() { return shape; }
+    public BigDecimal getWeightCt() { return weightCt; }
+    public String getColor() { return color; }
+    public String getClarity() { return clarity; }
+    public String getCut() { return cut; }
+    public String getPolish() { return polish; }
+    public String getSymmetry() { return symmetry; }
+    public String getFluorescence() { return fluorescence; }
+    public String getLab() { return lab; }
+    public String getCertNo() { return certNo; }
+    public BigDecimal getPerCarat() { return perCarat; }
+    public BigDecimal getTotalCarat() { return totalCarat; }
+    public BigDecimal getRate() { return rate; }
+    public BigDecimal getAmount() { return amount; }
+    public BigDecimal getBrokerage() { return brokerage; }
+    public BigDecimal getFinalAmount() { return finalAmount; }
+    public String getPaymentStatus() { return paymentStatus; }
+    public LocalDate getSellDate() { return sellDate; }
+    public LocalDate getPaymentDoneDate() { return paymentDoneDate; }
+    public String getLocation() { return location; }
+    public String getTerms() { return terms; }
+    public String getPartyName() { return partyName; }
+    public String getBrokerName() { return brokerName; }
 }
