@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  backend:
+    container_name: diamond-app
+    image: diamond-app
+    ports:
+      - "8080:3333"       # Host 8080 -> Container 3333
+    volumes:
+      - ./target/diamond-0.0.1-SNAPSHOT.jar:/app/app.jar  # Optional if using JAR directly
+    command: [ "java", "-jar", "/app/app.jar" ]              # Run your Spring Boot app
+    restart: always
