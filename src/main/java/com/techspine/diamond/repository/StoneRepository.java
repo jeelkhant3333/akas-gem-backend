@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+
 @Repository
 public interface StoneRepository extends JpaRepository<Stone, Long> {
 
@@ -61,7 +63,8 @@ public interface StoneRepository extends JpaRepository<Stone, Long> {
         LEFT JOIN location_master loc ON loc.id = s.location_id
         LEFT JOIN terms_master tm ON tm.id = s.terms_id
 
-        WHERE (
+        WHERE
+        (
             :search IS NULL
             OR :search = ''
             OR LOWER(s.kapan) LIKE LOWER(CONCAT('%', :search, '%'))
@@ -70,11 +73,28 @@ public interface StoneRepository extends JpaRepository<Stone, Long> {
             OR LOWER(s.broker_name) LIKE LOWER(CONCAT('%', :search, '%'))
             OR LOWER(s.cert_no) LIKE LOWER(CONCAT('%', :search, '%'))
         )
+
+        AND (:shapeId IS NULL OR s.shape_id = :shapeId)
+        AND (:colorId IS NULL OR s.color_id = :colorId)
+        AND (:clarityId IS NULL OR s.clarity_id = :clarityId)
+        AND (:cutId IS NULL OR s.cut_id = :cutId)
+        AND (:polishId IS NULL OR s.polish_id = :polishId)
+        AND (:symmetryId IS NULL OR s.symmetry_id = :symmetryId)
+        AND (:fluorescenceId IS NULL OR s.fluorescence_id = :fluorescenceId)
+        AND (:labId IS NULL OR s.lab_id = :labId)
+        AND (:paymentStatusId IS NULL OR s.payment_status_id = :paymentStatusId)
+        AND (:locationId IS NULL OR s.location_id = :locationId)
+        AND (:termsId IS NULL OR s.terms_id = :termsId)
+
+        AND (:fromDate IS NULL OR DATE(s.sell_date) >= :fromDate)
+        AND (:toDate IS NULL OR DATE(s.sell_date) <= :toDate)
         """,
             countQuery = """
         SELECT COUNT(*)
         FROM stones s
-        WHERE (
+
+        WHERE
+        (
             :search IS NULL
             OR :search = ''
             OR LOWER(s.kapan) LIKE LOWER(CONCAT('%', :search, '%'))
@@ -83,9 +103,40 @@ public interface StoneRepository extends JpaRepository<Stone, Long> {
             OR LOWER(s.broker_name) LIKE LOWER(CONCAT('%', :search, '%'))
             OR LOWER(s.cert_no) LIKE LOWER(CONCAT('%', :search, '%'))
         )
+
+        AND (:shapeId IS NULL OR s.shape_id = :shapeId)
+        AND (:colorId IS NULL OR s.color_id = :colorId)
+        AND (:clarityId IS NULL OR s.clarity_id = :clarityId)
+        AND (:cutId IS NULL OR s.cut_id = :cutId)
+        AND (:polishId IS NULL OR s.polish_id = :polishId)
+        AND (:symmetryId IS NULL OR s.symmetry_id = :symmetryId)
+        AND (:fluorescenceId IS NULL OR s.fluorescence_id = :fluorescenceId)
+        AND (:labId IS NULL OR s.lab_id = :labId)
+        AND (:paymentStatusId IS NULL OR s.payment_status_id = :paymentStatusId)
+        AND (:locationId IS NULL OR s.location_id = :locationId)
+        AND (:termsId IS NULL OR s.terms_id = :termsId)
+        AND (:fromDate IS NULL OR DATE(s.sell_date) >= :fromDate)
+        AND (:toDate IS NULL OR DATE(s.sell_date) <= :toDate)
         """,
             nativeQuery = true)
     Page<StoneProjection> findAllStones(
             @Param("search") String search,
-            Pageable pageable);
+
+            @Param("shapeId") Long shapeId,
+            @Param("colorId") Long colorId,
+            @Param("clarityId") Long clarityId,
+            @Param("cutId") Long cutId,
+            @Param("polishId") Long polishId,
+            @Param("symmetryId") Long symmetryId,
+            @Param("fluorescenceId") Long fluorescenceId,
+            @Param("labId") Long labId,
+            @Param("paymentStatusId") Long paymentStatusId,
+            @Param("locationId") Long locationId,
+            @Param("termsId") Long termsId,
+
+            @Param("fromDate") LocalDate fromDate,
+            @Param("toDate") LocalDate toDate,
+
+            Pageable pageable
+    );
 }

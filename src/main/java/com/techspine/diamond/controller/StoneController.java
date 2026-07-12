@@ -1,7 +1,6 @@
 package com.techspine.diamond.controller;
 
-import com.techspine.diamond.entity.Stone;
-import com.techspine.diamond.request.PaginationRequest;
+import com.techspine.diamond.request.StoneListRequest;
 import com.techspine.diamond.request.StoneRequest;
 import com.techspine.diamond.response.ApiResponse;
 import com.techspine.diamond.response.StoneDataListResponse;
@@ -9,8 +8,6 @@ import com.techspine.diamond.response.StoneResponse;
 import com.techspine.diamond.service.StoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/stones")
@@ -26,7 +23,7 @@ public class StoneController {
 
     // GET List
     @PostMapping("/list")
-    public ApiResponse<StoneDataListResponse> getAllStones(@RequestBody PaginationRequest request) {
+    public ApiResponse<StoneDataListResponse> getAllStones(@RequestBody StoneListRequest request) {
 
         return stoneService.getAllStones(request);
     }

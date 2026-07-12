@@ -3,10 +3,9 @@ package com.techspine.diamond.service;
 import com.techspine.diamond.entity.Stone;
 import com.techspine.diamond.projection.StoneProjection;
 import com.techspine.diamond.repository.*;
-import com.techspine.diamond.request.PaginationRequest;
+import com.techspine.diamond.request.StoneListRequest;
 import com.techspine.diamond.request.StoneRequest;
 import com.techspine.diamond.response.ApiResponse;
-import com.techspine.diamond.response.PaginationResponse;
 import com.techspine.diamond.response.StoneDataListResponse;
 import com.techspine.diamond.response.StoneResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,37 +105,66 @@ public class StoneService {
     }
 
     // GET ALL
-    public ApiResponse<StoneDataListResponse> getAllStones(PaginationRequest request) {
+    public ApiResponse<StoneDataListResponse> getAllStones(StoneListRequest request) {
+        try {
 
-        Sort sort = request.getSortDir().equalsIgnoreCase("asc")
-                ? Sort.by(request.getSortBy()).ascending()
-                : Sort.by(request.getSortBy()).descending();
+            Sort sort = request.getSortDir().equalsIgnoreCase("asc")
+                    ? Sort.by(request.getSortBy()).ascending()
+                    : Sort.by(request.getSortBy()).descending();
 
-        Pageable pageable = PageRequest.of(
-                request.getPageNo(),
-                request.getPageSize(),
-                sort
-        );
+            Pageable pageable = PageRequest.of(
+                    request.getPageNo(),
+                    request.getPageSize(),
+                    sort
+            );
 
-        Page<StoneProjection> page = stoneRepository.findAllStones(request.getSearch(), pageable);
+            Page<StoneProjection> page = stoneRepository.findAllStones(
+                    request.getSearch(),
 
-        List<StoneResponse> dataList =
-                page.getContent()
-                        .stream()
-                        .map(StoneResponse::new)
-                        .toList();
+                    request.getShapeId(),
+                    request.getColorId(),
+                    request.getClarityId(),
+                    request.getCutId(),
+                    request.getPolishId(),
+                    request.getSymmetryId(),
+                    request.getFluorescenceId(),
+                    request.getLabId(),
+                    request.getPaymentStatusId(),
+                    request.getLocationId(),
+                    request.getTermsId(),
 
-        StoneDataListResponse paginationResponse =
-                new StoneDataListResponse(
-                        page.getTotalElements(),
-                        page.getTotalPages(),
-                        page.getNumber(),
-                        page.getSize(),
-                        dataList
-                );
+                    request.getFromDate(),
+                    request.getToDate(),
 
-        return new ApiResponse<>(1, "Stones fetched successfully",
-                paginationResponse);
+                    pageable
+            );
+
+            List<StoneResponse> dataList = page.getContent()
+                    .stream()
+                    .map(StoneResponse::new)
+                    .toList();
+
+            StoneDataListResponse response = new StoneDataListResponse(
+                    page.getTotalElements(),
+                    page.getTotalPages(),
+                    page.getNumber(),
+                    page.getSize(),
+                    dataList
+            );
+
+            return new ApiResponse<>(
+                    1,
+                    "Stones fetched successfully",
+                    response
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ApiResponse<>(
+                    0,
+                    e.getMessage(),
+                    null
+            );
+        }
     }
 
     // GET BY ID
