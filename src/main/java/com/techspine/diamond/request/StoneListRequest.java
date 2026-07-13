@@ -1,5 +1,7 @@
 package com.techspine.diamond.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 
 public class StoneListRequest extends PaginationRequest {
@@ -16,7 +18,10 @@ public class StoneListRequest extends PaginationRequest {
     private Long locationId;
     private Long termsId;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate fromDate;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate toDate;
 
     public Long getShapeId() {

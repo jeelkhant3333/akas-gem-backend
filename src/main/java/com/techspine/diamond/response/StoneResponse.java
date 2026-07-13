@@ -1,5 +1,6 @@
 package com.techspine.diamond.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.techspine.diamond.entity.Stone;
 import com.techspine.diamond.projection.StoneProjection;
 
@@ -28,7 +29,10 @@ public class StoneResponse {
     private BigDecimal brokerage;
     private BigDecimal finalAmount;
     private String paymentStatus;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate sellDate;
+
     private LocalDate paymentDoneDate;
     private String location;
     private String terms;

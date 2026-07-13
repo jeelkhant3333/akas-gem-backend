@@ -118,6 +118,8 @@ public class StoneService {
                     sort
             );
 
+            System.out.println("shape" + request.getShapeId());
+
             Page<StoneProjection> page = stoneRepository.findAllStones(
                     request.getSearch(),
 
